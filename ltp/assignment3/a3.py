@@ -21,7 +21,10 @@ def is_valid_word(wordlist, word):
 
     >>> is_valid_word(['ANT', 'BOX', 'SOB', 'TO'], 'TO')
     True
+    >>> is_valid_word(['RED','GREEN','BLUE','YELLOW'],'MAGENTA'))
+    False
     """
+    return word in wordlist
 
 
 def make_str_from_row(board, row_index):
@@ -32,7 +35,14 @@ def make_str_from_row(board, row_index):
 
     >>> make_str_from_row([['A', 'N', 'T', 'T'], ['X', 'S', 'O', 'B']], 0)
     'ANTT'
+    >>> make_str_from_row([['R','G','B'],['C','Y','K']],1]
+    'CYK'
     """
+    str_row = ''
+    for col in board[row_index]:
+        str_row = str_row + col
+        
+    return str_row
 
 
 def make_str_from_column(board, column_index):
@@ -43,7 +53,15 @@ def make_str_from_column(board, column_index):
 
     >>> make_str_from_column([['A', 'N', 'T', 'T'], ['X', 'S', 'O', 'B']], 1)
     'NS'
+    >>> make_str_from_row([['R','G','B'],['C','Y','K']],1]
+    'RC'
+
     """
+    str_col = ''
+    for row in board:
+        str_col = str_col + row[column_index]
+
+    return str_col
 
 
 def board_contains_word_in_row(board, word):
@@ -77,7 +95,14 @@ def board_contains_word_in_column(board, word):
 
     >>> board_contains_word_in_column([['A', 'N', 'T', 'T'], ['X', 'S', 'O', 'B']], 'NO')
     False
+    >>> board_contains_word_in_column([['A', 'N', 'T', 'T'], ['X', 'S', 'O', 'B']], 'AX')
+    True
     """
+    for column_index in range(len(board[0])):
+        if word in make_str_from_column(board, column_index):
+            return True
+
+    return False
 
 
 def board_contains_word(board, word):
@@ -90,6 +115,7 @@ def board_contains_word(board, word):
     >>> board_contains_word([['A', 'N', 'T', 'T'], ['X', 'S', 'O', 'B']], 'ANT')
     True
     """
+    return board_contains_word_in_row(board, word) or board_contains_word_in_row(board, word)
 
 
 def word_score(word):
@@ -104,9 +130,34 @@ def word_score(word):
 
     >>> word_score('DRUDGERY')
     16
+    >>> word_score('AX')
+    0
+    >>> word_score('CAT')
+    3
+    >>> word_score('ALBINO')
+    6
+    >>> word_score('ABALONE')
+    14
+    >>> word_score('AARDVARKS')
+    18
+    >>> word_score('ARRDWOLVES')
+    30
+    >>> word_score('WOLFBERRIES')
+    33
+    >>> word_score('DOGMATICALLY')
+    36
     """
+    word_length = len(word)
+    if (word_length < 3):
+        score = 0
+    elif (word_length <= 6):
+        score = word_length
+    elif (word_length <= 9):
+        score = word_length * 2
+    else:
+        score = word_length * 3
 
-
+    return score
 def update_score(player_info, word):
     """ ([str, int] list, str) -> NoneType
 
@@ -115,6 +166,7 @@ def update_score(player_info, word):
 
     >>> update_score(['Jonathan', 4], 'ANT')
     """
+    player_info[1] = player_info[1] + word_score(word)
 
 
 def num_words_on_board(board, words):
