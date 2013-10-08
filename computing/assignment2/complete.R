@@ -12,4 +12,20 @@ complete <- function(directory, id = 1:332) {
   ## ...
   ## where 'id' is the monitor ID number and 'nobs' is the
   ## number of complete cases
+  
+  df <- data.frame(character(),integer())
+  names(df) <- c('id','nobs')
+  for (data_id in id) {
+    print(id)
+    data_filename <- paste(directory,'/',sprintf("%03d",data_id),'.csv',sep="")
+    if(!file.exists(data_filename)) {
+      stop("directory 'specdata' not found; please change your working directory")
+    }
+    data <- read.csv(data_filename)
+    sdata <- subset(data,TRUE,id)
+    row <- data.frame(as.integer(data_id),nrow(sdata))
+    names(row) <- c('id','nobs')
+    rbind(df,row)
+  }
+  return (df)
 }
