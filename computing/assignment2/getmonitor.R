@@ -13,8 +13,11 @@ getmonitor <- function(id, directory, summarize = FALSE) {
   ## Your code here
   
   data_filename <- paste(directory,'/',sprintf("%03d",id),'.csv',sep="")
-  print(data_file_name)
   if(!file.exists(data_filename))
     stop("directory 'specdata' not found; please change your working directory")
-  read.csv(data_filename)
+  data <- read.csv(data_filename)
+  if (summarize == TRUE) {
+    print(summary(data))
+  }
+  return(data)
 }
