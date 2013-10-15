@@ -30,21 +30,22 @@ rankhospital <- function(state, outcome, num) {
   }
   
   names(outcome) <- c("hospital","rate")
+  #outcome$hosptial <- as.character(outcome$hospital)
   outcome$rate <- as.character(outcome$rate)
   outcome$rate <- as.numeric(outcome$rate)
-  h <- sort(h, partial=c(2))
-  print(h)
+  o <- order(outcome$rate,outcome$hospital)
+  r <- cbind(outcome,o)
+  h <- r[o,]
   nrows <- nrow(h)
-  print(nrows)
   if (num == "best") {
     num <- 1
   } else if (num == "worst") {
-    num <- nrow
+    num <- nrows
   }
   if (num > nrows) {
     h <- NA
   } else {
-    h <- as.character(h$hospital)
+    h <- as.character(h$hospital[num])
   }
   return(h)
 }
