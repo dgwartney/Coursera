@@ -1,0 +1,25 @@
+\documentclass{article}
+
+\begin{document}
+\author{David Gwartney}
+\title{\Large{Computing for Data Analysis}\\Fall 2013\\Week 3 Assignment}
+\maketitle
+
+\SweaveOpts{concordance=TRUE}
+\section*{Read In Data}
+
+<<echo=TRUE>>=
+
+outcome <- read.csv("outcome-of-care-measures.csv")
+@
+
+\section*{Create Histogram}
+
+<<echo=TRUE,fig=TRUE>>=
+outcome[, 11] <- as.numeric(outcome[, 11])
+## You may get a warning about NAs being introduced; that is okay
+hist(outcome[, 11],xlab="30-day Death Rate",main="30-day Death Rate")
+@
+
+
+\end{document}
