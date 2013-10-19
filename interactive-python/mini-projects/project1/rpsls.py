@@ -1,7 +1,11 @@
 # Rock-paper-scissors-lizard-Spock template
 
+# Unit testing framework
 import unittest
+# Random number generation framework
 import random
+# Standard system calls
+import sys
 
 # The key idea of this program is to equate the strings
 # "rock", "paper", "scissors", "lizard", "Spock" to numbers
@@ -98,11 +102,6 @@ def name_to_number(name):
 
     return number
 
-def game_result(player,computer):
-    """ (int,int) -> int
-    """
-    return (player - computer) % 5
-
 def rpsls(name):
     """ (str) -> None
 
@@ -153,10 +152,14 @@ def rpsls(name):
     computer_name = number_to_name(computer_number)
     
     # print results
+    print('')
     print('Player chooses ' + name)
     print('Computer chooses ' + computer_name)
     print(outcome)
 
+#
+# Unit Tests
+#
 class TestRPSLS(unittest.TestCase):
     
     def setUp(self):
@@ -164,6 +167,7 @@ class TestRPSLS(unittest.TestCase):
 
         Setup scaffolding for the tests
         """
+        # Set a seed so our results are repeatable
         random.seed(1)
 
 #
@@ -224,23 +228,21 @@ class TestRPSLS(unittest.TestCase):
         self.assertEqual(name_to_number('hand'),9999)
 
 
-##3
-##0
-##1
-##3
-##0
-    def test_rpsls_rock(self):
-        result = "Player chooses rock\nComputer chooses lizard\nComputer wins1"
-        self.assertEqual(rpsls("rock"),result)
-        
-    def test_rpsls_rock(self):
-        result = "Player chooses Spock\nComputer chooses rock\nComputer wins!"
-        self.assertEqual(rpsls("rock"),result)
-        
+
+# Computer numbers when seed is set to 1: 3, 0, 1, 3, 0
 
 #
-# Test cases for rpsls
+# Requires that we redirect standard out, unable to find a quick solution so manually test
 #
+##    def test_rpsls_rock(self):
+##        result = "Player chooses rock\nComputer chooses lizard\nComputer wins1"
+##        self.assertEqual(rpsls("rock"),result)
+##        
+##    def test_rpsls_rock(self):
+##        result = "Player chooses Spock\nComputer chooses rock\nComputer wins!"
+##        self.assertEqual(rpsls("rock"),result)
+        
+
 
 
 
@@ -250,9 +252,14 @@ def run_unit_tests():
     Runs the unit tests to validate code
     """
     unittest.main()
-
+#
 # Run our unit tests
-run_unit_tests()
+#
+## run_unit_tests()
+
+# Set seed before running so the sequence repeats for testing
+##random.seed(1)
+
 
 # test your code
 rpsls("rock")
