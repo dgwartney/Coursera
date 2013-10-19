@@ -56,6 +56,7 @@ def number_to_name(number):
         name = 'scissors'
     else:
         name = 'unknown'
+        print("Invalid number setting name to unknown")
 
     return name
 
@@ -96,6 +97,7 @@ def name_to_number(name):
         number = 4
     else:
         number = 9999
+        print("Invalid name setting number to 9999")
 
     return number
 
