@@ -20,10 +20,21 @@ def number_to_name(number):
 
     Return the name of the hand given the number of the hand
 
-    >>> numer_to_name(0)
+    >>> number_to_name(0)
     rock
-    >>> is_valid_word(['RED','GREEN','BLUE','YELLOW'],'MAGENTA'))
-    False
+    >>> number_to_name(1)
+    Spock
+    >>> number_to_name(2)
+    paper
+    >>> number_to_name(3)
+    lizard
+    >>> number_to_name(4)
+    Scissors
+    >>> number_to_name(100)
+    unknown
+    >>> number_to_name(-1)
+    unknown
+
     """
 
 
@@ -49,13 +60,43 @@ def number_to_name(number):
 
     
 def name_to_number(name):
+    """ (str) -> int
+
+    Converts the input name to its corresponding number
+    
+    >>> name_to_number('rock')
+    rock
+    >>> name_to_number('Spock')
+    Spock
+    >>> name_to_number('paper')
+    paper
+    >>> name_to_number('lizard')
+    lizard
+    >>> name_to_number('scissors')
+    Scissors
+    >>> name_to_number('thumb')
+    9999
+    >>> name_to_number('hand')
+    """
     # fill in your code below
 
     # convert name to number using if/elif/else
     # don't forget to return the result!
-    number = ""
-    return number
 
+    if (name == 'rock'):
+        number = 0
+    elif (name == 'Spock'):
+        number = 1
+    elif (name == 'paper'):
+        number = 2
+    elif (name == 'lizard'):
+        number = 3
+    elif (name == 'scissors'):
+        number = 4
+    else:
+        number = 9999
+
+    return number
 
 def rpsls(name): 
     # fill in your code below
@@ -75,32 +116,70 @@ def rpsls(name):
 
 class TestRPSLS(unittest.TestCase):
     
-    def setUp(self):
-        """ (self) -> None
+##    def setUp(self):
+##        """ (self) -> None
+##
+##        Setup scaffolding for the tests
+##        """
+##        print('setup')
 
-        Setup scaffolding for the tests
-        """
-        print('setup')
-        
+#
+# Create our test cases using this mapping:
 # 0 - rock
 # 1 - Spock
 # 2 - paper
 # 3 - lizard
 # 4 - scissors
-    def test_number_to_name_rock(self):
+
+#
+# Test cases for number_to_name()
+#
+    def test_number_to_name_0(self):
         self.assertEqual(number_to_name(0),'rock')
         
-    def test_number_to_name_Spock(self):
+    def test_number_to_name_1(self):
         self.assertEqual(number_to_name(1),'Spock')
         
-    def test_number_to_name_paper(self):
+    def test_number_to_name_2(self):
         self.assertEqual(number_to_name(2),'paper')
         
-    def test_number_to_name_lizard(self):
+    def test_number_to_name_3(self):
         self.assertEqual(number_to_name(3),'lizard')
         
-    def test_number_to_name_scissors(self):
+    def test_number_to_name_4(self):
         self.assertEqual(number_to_name(4),'scissors')
+
+    def test_number_to_name_100(self):
+        self.assertEqual(number_to_name(100),'unknown')
+        
+    def test_number_to_name_negative1(self):
+        self.assertEqual(number_to_name(-1),'unknown')
+
+
+#
+# Test cases for name_to_number()
+#
+    def test_name_to_number_rock(self):
+        self.assertEqual(name_to_number('rock'),0)
+
+    def test_name_to_number_Spock(self):
+        self.assertEqual(name_to_number('Spock'),1)
+
+    def test_name_to_number_paper(self):
+        self.assertEqual(name_to_number('paper'),2)
+
+    def test_name_to_number_lizard(self):
+        self.assertEqual(name_to_number('lizard'),3)
+
+    def test_name_to_number_scissors(self):
+        self.assertEqual(name_to_number('scissors'),4)
+
+    def test_name_to_number_thumb(self):
+        self.assertEqual(name_to_number('thumb'),9999)
+        
+    def test_name_to_number_hand(self):
+        self.assertEqual(name_to_number('hand'),9999)
+
 
 
 def run_unit_tests():
