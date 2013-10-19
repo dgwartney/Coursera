@@ -6,7 +6,7 @@ corr <- function(directory,threshold=0) {
   for (file in files) {
     data_filename <- paste(directory,'/',file,sep="")
     if(!file.exists(data_filename)) {
-      stop("directory 'specdata' not found; please change your working directory")
+      stop(paste("File: ",data_files," not found!",sep=""))
     }
     data <- read.csv(data_filename)
     ndata <- subset(data,!is.na(sulfate),select=c(sulfate,nitrate))
