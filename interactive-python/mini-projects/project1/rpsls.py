@@ -98,30 +98,73 @@ def name_to_number(name):
 
     return number
 
-def rpsls(name): 
-    # fill in your code below
+def game_result(player,computer):
+    """ (int,int) -> int
+    """
+    return (player - computer) % 5
+
+def rpsls(name):
+    """ (str) -> None
+
+    Simulates the game of rock,Spock, paper, lizard. The input name
+    is the players hand. A random hand is selected and compared against
+    the player and output is provide on the winner.
+
+    >>> rpsls('rock')
+    Player chooses rock
+    Computer chooses scissors
+    Player wins!
+    >>> rpsls('Spock')
+    Player chooses Spock
+    Computer chooses lizard
+    Computer wins!
+    >>> rpsls('paper')
+    Player chooses paper
+    Computer chooses lizard
+    Computer wins!
+    >>> rpsls('lizard')
+    Player chooses lizard
+    Computer chooses scissors
+    Computer wins!
+    >>> rpsls('scissors')
+    Player chooses scissors
+    Computer chooses Spock
+    Computer wins!
+    """
 
     # convert name to player_number using name_to_number
+    player_number = name_to_number(name)
 
     # compute random guess for comp_number using random.randrange()
+    computer_number = random.randrange(0,5)
 
     # compute difference of player_number and comp_number modulo five
-
-	# use if/elif/else to determine winner
-
+    result = (player_number - computer_number) % 5
+    
+    # use if/elif/else to determine winner
+    if (result == 0):
+        outcome = 'Player and Computer tie!'
+    elif (result >= 1 and result <= 2):
+        outcome ='Player wins!'
+    else:
+        outcome = 'Computer wins!'
+    
     # convert comp_number to name using number_to_name
+    computer_name = number_to_name(computer_number)
     
     # print results
-    print('rock')
+    print('Player chooses ' + name)
+    print('Computer chooses ' + computer_name)
+    print(outcome)
 
 class TestRPSLS(unittest.TestCase):
     
-##    def setUp(self):
-##        """ (self) -> None
-##
-##        Setup scaffolding for the tests
-##        """
-##        print('setup')
+    def setUp(self):
+        """ (self) -> None
+
+        Setup scaffolding for the tests
+        """
+        random.seed(1)
 
 #
 # Create our test cases using this mapping:
@@ -179,6 +222,25 @@ class TestRPSLS(unittest.TestCase):
         
     def test_name_to_number_hand(self):
         self.assertEqual(name_to_number('hand'),9999)
+
+
+##3
+##0
+##1
+##3
+##0
+    def test_rpsls_rock(self):
+        result = "Player chooses rock\nComputer chooses lizard\nComputer wins1"
+        self.assertEqual(rpsls("rock"),result)
+        
+    def test_rpsls_rock(self):
+        result = "Player chooses Spock\nComputer chooses rock\nComputer wins!"
+        self.assertEqual(rpsls("rock"),result)
+        
+
+#
+# Test cases for rpsls
+#
 
 
 
