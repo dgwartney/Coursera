@@ -72,31 +72,6 @@ class TestRPSLS(unittest.TestCase):
     def test_name_to_number_hand(self):
         self.assertEqual(r.name_to_number('hand'),9999)
 
-
-
-# Computer numbers when seed is set to 1: 3, 0, 1, 3, 0
-
-#
-# Requires that we redirect standard out, unable to find a quick solution so manually test
-#
-##    def test_rpsls_rock(self):
-##        result = "Player chooses rock\nComputer chooses lizard\nComputer wins1"
-##        self.assertEqual(rpsls("rock"),result)
-##        
-##    def test_rpsls_rock(self):
-##        result = "Player chooses Spock\nComputer chooses rock\nComputer wins!"
-##        self.assertEqual(rpsls("rock"),result)
-        
-
-def run_unit_tests():
-    """ (None) -> None
-
-    Runs the unit tests to validate code
-    """
+if __name__ == '__main__':
     unittest.main()
-#
-# Run our unit tests
-#
-run_unit_tests()
-
 
